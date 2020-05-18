@@ -1,9 +1,15 @@
 const express = require("express");
 const app = express();
 
-app.get("/api/signup", (req, res) => {
-  res.json({
-    message: "Server is running at /signup",
+// import routes
+const authRoutes = require("./routes/auth.js");
+
+// middleware
+app.use("/api", authRoutes);
+
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "Server is running at /",
   });
 });
 
