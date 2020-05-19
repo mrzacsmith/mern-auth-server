@@ -55,7 +55,7 @@ userSchema.methods = {
   encryptPassword: function (password) {
     if (!password) return "";
     try {
-      return crypto.createHmac("sha256", secret).update(password).digest("hex");
+      return crypto.createHmac("sha1", secret).update(password).digest("hex");
     } catch (err) {
       return "";
     }
