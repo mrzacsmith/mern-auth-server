@@ -8,6 +8,17 @@ require("dotenv").config();
 
 const app = express();
 
+// connect to db ~ check deprecated warnings https://mongoosejs.com/docs/deprecations.html
+mongoose
+  .connect(process.env.DATABASE, {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+  .then(() => console.log("DB Connected"))
+  .catch((err) => console.log("DB Connection Error", err));
+
 // import routes
 const authRoutes = require("./routes/auth.js");
 
