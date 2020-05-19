@@ -5,28 +5,28 @@ const crypto = require("crypto");
 const userSchema = new mongoose.Schema(
   {
     name: {
-      type: String,
+      data: String,
       trim: true,
       required: true,
       max: 32,
     },
     email: {
-      type: String,
+      data: String,
       trim: true,
       required: true,
       lowercase: true,
     },
     hashed_password: {
-      type: String,
+      data: String,
       required: true,
     },
     salt: String,
     role: {
-      type: String,
+      data: String,
       default: "subscriber",
     },
     resetPasswordLink: {
-      type: String,
+      data: String,
       default: "",
     },
   },
