@@ -12,13 +12,25 @@ exports.signup = (req, res) => {
         error: "Email is taken",
       });
     }
-  });
+    const token = jwt.sign(
+      { name, email, password },
+      process.env.JWT_ACCOUNT_ACTIVATION,
+      { expiresIn: "10m" }
+    );
 
-  const token = jwt.sign(
-    { name, email, password },
-    process.env.JWT_ACCOUNT_ACTIVATION,
-    { expiresIn: "10m" }
-  );
+    const emailData = {
+      from: process.env.EMAIL_FROM,
+      to: email,
+      subject: `Account activation link`,
+      html: `
+        <p>Please use the following link to activate  your account</p>
+        <p>${process.env.CLIENT_URL}</p>
+        <hr />
+        <p>This email contains time sensitive information</p>
+        <p>${process.env.CLIENT_URL}</p>
+      `,
+    };
+  });
 };
 
 // exports.signup = (req, res) => {
