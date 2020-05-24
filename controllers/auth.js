@@ -23,13 +23,21 @@ exports.signup = (req, res) => {
       to: email,
       subject: `Account activation link`,
       html: `
-        <p>Please use the following link to activate  your account</p>
-        <p>${process.env.CLIENT_URL}</p>
+        <p>Please use the following link to activate  your account:</p>
+        <p>${process.env.CLIENT_URL}/auth/activate</p>
         <hr />
-        <p>This email contains time sensitive information</p>
+        <p>This email contains time sensitive information!</p>
         <p>${process.env.CLIENT_URL}</p>
       `,
     };
+
+    sgMail.send(emailData).then((sent) => {
+      console.log("SIGN UP EMAIL SENT");
+
+      return res.json({
+        message: `Email has been send to ${email}. Follow the instructions to activate your account.`,
+      });
+    });
   });
 };
 
